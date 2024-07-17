@@ -1,12 +1,17 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { addTodoItem } from "@/lib/features/todoItems/crudTodoItems";
+import { addTodoItem, initializeTodos } from "@/lib/features/todoItems/crudTodoItems";
 import StartToastifyInstance from "toastify-js";
 
 export default function Home() {
   const [todo, setTodo] = useState("");
   const dispatch = useDispatch();
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      dispatch(initializeTodos());
+    }
+  }, [dispatch]);
   const showToastMessage = () => {
     StartToastifyInstance({
       text: "Todo added successfully",

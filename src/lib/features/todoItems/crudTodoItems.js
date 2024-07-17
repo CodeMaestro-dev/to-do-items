@@ -3,9 +3,13 @@ import { createSlice } from "@reduxjs/toolkit";
 const crudTodoSlice = createSlice({
   name: "crudTodo",
   initialState: {
-    todoItems: JSON.parse(localStorage.getItem("todoItems")) || [],
+    todoItems: [],
   },
   reducers: {
+    initializeTodos: (state) => {
+      const savedTodos = JSON.parse(localStorage.getItem("todoItems")) || [];
+      state.todoItems = savedTodos;
+    },
     addTodoItem: (state, action) => {
       state.todoItems.push(action.payload);
       localStorage.setItem("todoItems", JSON.stringify(state.todoItems));
@@ -44,6 +48,6 @@ const crudTodoSlice = createSlice({
 });
 
 export const getTodo = (state) => state.crudTodo;
-export const { addTodoItem, deleteTodoItem, completeTodoItem, editTodoItem } =
+export const { addTodoItem, deleteTodoItem, completeTodoItem, editTodoItem, initializeTodos } =
   crudTodoSlice.actions;
 export default crudTodoSlice.reducer;
