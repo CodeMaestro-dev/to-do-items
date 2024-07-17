@@ -1,14 +1,16 @@
 "use client";
 import Link from "next/link";
 import { useState } from "react";
+import { usePathname } from "next/navigation";
 
 export default function Navabar() {
+  const pathname = usePathname();
   const [isModalOpen, setIsModalOpen] = useState(false);
   return (
     <header className="bg-dark-black py-4 px-10 fixed w-full z-10">
       <div className="flex gap-3 items-center text-tertiary">
         <div
-          className="block md:hidden border border-secondary cursor-pointer rounded-full p-2"
+          className="block lg:hidden border border-secondary cursor-pointer rounded-full p-2"
           onClick={() => setIsModalOpen(!isModalOpen)}
         >
           {isModalOpen ? (
@@ -47,7 +49,7 @@ export default function Navabar() {
       </div>
       {isModalOpen ? (
         <ul className="text-tertiary flex flex-col gap-10 py-5 px-[36px] items-center justify-center">
-          <li title="Add Todo">
+          <li title="Add Todo" className={pathname == "/" ? " bg-secondary rounded-md" : ""}>
             <Link className="pl-3 pe-10 py-2 flex gap-3" href="/">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -66,7 +68,7 @@ export default function Navabar() {
               <span>Add Todo</span>
             </Link>
           </li>
-          <li title="Todo">
+          <li title="Todo" className={pathname == "/todo" ? " bg-secondary rounded-md" : ""}>
             <Link className="pl-3 pe-10 py-2 flex gap-3" href="/todo">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -85,7 +87,7 @@ export default function Navabar() {
               <span>To do</span>
             </Link>
           </li>
-          <li title="Completed Todo">
+          <li title="Completed Todo" className={pathname == "/completed" ? " bg-secondary rounded-md" : ""}>
             <Link className="pl-3 pe-10 py-2 flex gap-3" href="/completed">
               <svg
                 xmlns="http://www.w3.org/2000/svg"

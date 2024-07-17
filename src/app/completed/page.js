@@ -44,13 +44,11 @@ export default function Completed() {
   const showToastMessage = () => {
     StartToastifyInstance({
       text: "Todo deleted successfully",
-      className: "absolute z-20 p-4 top-5 right-5 flex gap-3 text-tertiary",
+      className: "fixed z-20 p-4 top-5 right-5 flex gap-3 text-tertiary",
       duration: 3000,
       destination: "https://github.com/apvarun/toastify-js",
       newWindow: true,
       close: true,
-      gravity: "top",
-      position: "left",
       stopOnFocus: true,
       style: {
         background: "linear-gradient(to right, #8A2BE2,  #8A2BA2)",

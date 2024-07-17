@@ -1,11 +1,14 @@
+"use client"
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 export default function Sidebar() {
+  const pathname = usePathname();
   return (
     <nav className="bg-dark-black text-tertiary fixed h-full col-start-1 col-end-3 hidden lg:block">
       <ul className="flex flex-col gap-10 py-12 px-[36px]">
-        <li title="Add Todo">
-          <Link className="pl-3 pe-0 min-[1790px]:pe-10 py-2 flex gap-3" href="/">
+        <li title="Add Todo" className={pathname == "/" ? " bg-secondary rounded-md" : ""}>
+          <Link className="pl-0 min-[1790px]:pl-3 pe-0 min-[1790px]:pe-10 py-2 flex gap-3" href="/">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -23,8 +26,8 @@ export default function Sidebar() {
             <span className="hidden min-[1790px]:block">Add Todo</span>
           </Link>
         </li>
-        <li title="Todo">
-          <Link className="pl-3 pe-0 min-[1790px]:pe-10 py-2 flex gap-3" href="/todo">
+        <li title="Todo" className={pathname == "/todo" ? "bg-secondary rounded-md" : ""}>
+          <Link className="pl-0 min-[1790px]:pl-3 pe-0 min-[1790px]:pe-10 py-2 flex gap-3" href="/todo">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -42,8 +45,8 @@ export default function Sidebar() {
             <span className="hidden min-[1790px]:block">To do</span>
           </Link>
         </li>
-        <li title="Completed Todo">
-          <Link className="pl-3 pe-0 min-[1790px]:pe-10 py-2 flex gap-3" href="/completed">
+        <li title="Completed Todo" className={pathname == "/completed" ? "bg-secondary rounded-md" : ""}>
+          <Link className="pl-0 min-[1790px]:pl-3 pe-0 min-[1790px]:pe-10 py-2 flex gap-3" href="/completed">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"

@@ -29,11 +29,13 @@ export default function Todo() {
   const completeItem = (e) => {
     const completeLiKey = e.target.closest("li").id;
     dispatch(completeTodoItem(completeLiKey));
+    showSecondToastMessage();
   };
 
   const completeTodo = (e) => {
     const completeLiKey = e.target.closest("li").id;
     dispatch(completeUndoneItems(completeLiKey));
+    showSecondToastMessage();
   };
 
   const handleEdit = (title) => {
@@ -56,7 +58,24 @@ export default function Todo() {
   const showToastMessage = () => {
     StartToastifyInstance({
       text: "Todo edited successfully",
-      className: "absolute z-20 p-4 top-5 right-5 flex gap-3 text-tertiary",
+      className: "fixed z-20 p-4 top-5 right-5 flex gap-3 text-tertiary",
+      duration: 3000,
+      destination: "https://github.com/apvarun/toastify-js",
+      newWindow: true,
+      close: true,
+      gravity: "top",
+      position: "left",
+      stopOnFocus: true,
+      style: {
+        background: "linear-gradient(to right, #8A2BE2,  #8A2BA2)",
+      },
+    }).showToast();
+  };
+
+  const showSecondToastMessage = () => {
+    StartToastifyInstance({
+      text: "Todo status changed to complete successfully",
+      className: "fixed z-20 p-4 top-5 right-5 flex gap-3 text-tertiary",
       duration: 3000,
       destination: "https://github.com/apvarun/toastify-js",
       newWindow: true,
@@ -82,13 +101,13 @@ export default function Todo() {
     <div>
       <h1 className="text-2xl mb-10">To-dos</h1>
       {isModalOpen ? (
-        <div className="absolute top-0 bottom-0 left-0 right-0 backdrop-blur-sm w-screen h-screen z-[100px] flex items-center justify-center">
+        <div className="fixed inset-0 backdrop-blur-sm w-screen h-screen z-50 flex items-center justify-center">
           <form
-            className="flex flex-col gap-5 w-[600px]"
+            className="flex flex-col gap-5 w-[600px] bg-white p-5 rounded-lg shadow-lg"
             onSubmit={handleSubmit}
           >
             <div
-              className="border border-secondary cursor-pointer rounded-full p-2 w-fit"
+              className="border border-secondary cursor-pointer rounded-full p-2 w-fit text-primary"
               onClick={() => setModalOpen(false)}
             >
               <svg
@@ -109,7 +128,7 @@ export default function Todo() {
             <input
               name="to-do"
               id="to-do"
-              className="bg-transparent border border-tertiary px-3 py-2 focus:border focus:border-secondary focus:outline-none"
+              className="bg-primary border border-tertiary px-3 py-2 focus:border focus:border-secondary focus:outline-none rounded-md"
               onInput={(e) => setEditedValue(e.target.value)}
               value={editedValue}
             />

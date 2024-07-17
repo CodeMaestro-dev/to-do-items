@@ -15,7 +15,7 @@ export default function Home() {
   const showToastMessage = () => {
     StartToastifyInstance({
       text: "Todo added successfully",
-      className: "absolute z-20 p-4 top-5 right-5 flex gap-3 text-tertiary",
+      className: "fixed z-20 p-4 top-5 right-5 flex gap-3 text-tertiary",
       duration: 3000,
       destination: "https://github.com/apvarun/toastify-js",
       newWindow: true,
@@ -41,7 +41,8 @@ export default function Home() {
   };
 
   return (
-    <div className="flex justify-center mt-[50px]">
+    <div className="flex flex-col justify-center items-center gap-10 mt-[50px]">
+      <h1 className="text-2xl">Add a To do</h1>
       <form className="flex flex-col gap-5 w-[600px]" onSubmit={handleSubmit}>
         <textarea
           name="to-do"
