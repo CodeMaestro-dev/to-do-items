@@ -48,7 +48,7 @@ export default function Navabar() {
         <h1>Todo</h1>
       </div>
       {isModalOpen ? (
-        <ul className="text-tertiary flex flex-col gap-10 py-5 px-[36px] items-center justify-center">
+        <ul className="text-tertiary flex flex-col gap-10 py-5 px-0 md:px-[36px] items-center justify-center">
           <li title="Add Todo" className={pathname == "/" ? " bg-secondary rounded-md" : ""}>
             <Link className="pl-3 pe-10 py-2 flex gap-3" href="/">
               <svg
