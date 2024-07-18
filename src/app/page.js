@@ -1,11 +1,15 @@
 "use client";
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { addTodoItem, initializeTodos } from "@/lib/features/todoItems/crudTodoItems";
+import {
+  addTodoItem,
+  initializeTodos,
+} from "@/lib/features/todoItems/crudTodoItems";
 import StartToastifyInstance from "toastify-js";
 
 export default function Home() {
   const [todo, setTodo] = useState("");
+  const [error, setError] = useState(false);
   const dispatch = useDispatch();
   useEffect(() => {
     if (typeof window !== "undefined") {
@@ -30,6 +34,11 @@ export default function Home() {
   };
   const handleSubmit = (e) => {
     e.preventDefault();
+    setError(false);
+    if (todo == "") {
+      setError(true);
+      return;
+    }
     const todoItem = {
       id: Date.now(),
       title: todo,
@@ -43,12 +52,23 @@ export default function Home() {
   return (
     <div className="flex flex-col justify-center items-center gap-10 mt-[50px]">
       <h1 className="text-2xl">Add a To do</h1>
-      <form className="flex flex-col gap-5 w-[600px]" onSubmit={handleSubmit}>
+      <form
+        className="flex flex-col gap-5 w-full md:w-[600px]"
+        onSubmit={handleSubmit}
+      >
+        {error ? (
+          <p className="text-red-500 text-center">
+            You didn&apos;t state anything
+          </p>
+        ) : null}
         <textarea
           name="to-do"
           id="to-do"
           className="bg-transparent border border-tertiary px-3 py-2 focus:border focus:border-secondary focus:outline-none"
-          onInput={(e) => setTodo(e.target.value)}
+          onInput={(e) => {
+            setTodo(e.target.value);
+            setError(false);
+          }}
           value={todo}
         />
         <button className="rounded-md bg-secondary text-tertiary px-3 py-2">
